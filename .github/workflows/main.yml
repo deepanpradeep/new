@@ -15,8 +15,8 @@ jobs:
 
       - name: Merge main into dev
         run: |
-          git config --global user.email "your_email@example.com"
-          git config --global user.name "Your Name"
+          git config --global user.email "deepanpradeep406@gmail.com"
+          git config --global user.name "deepanpradeep"
           git fetch origin dev:dev
           git checkout dev
           git merge main --no-edit
