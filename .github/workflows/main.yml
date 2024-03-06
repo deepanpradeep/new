@@ -1,4 +1,4 @@
-name: Merge Main into Dev
+name: Merge Main into Dev and Update README
 
 on:
   push:
@@ -22,3 +22,10 @@ jobs:
           git merge main --no-edit
           git push origin dev
 
+      - name: Update README
+        run: |
+          echo "### Merge Main into Dev" >> README.md
+          echo "This README file was automatically updated to reflect the merge of changes from the main branch into the dev branch." >> README.md
+          git add README.md
+          git commit -m "Update README after merging main into dev" || true
+          git push origin dev
