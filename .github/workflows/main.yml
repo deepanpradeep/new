@@ -2,7 +2,7 @@ name: Merge Dev README into Main
 
 on:
   push:
-    branches:
+    branches: 
       - dev
 
 jobs:
