@@ -1,4 +1,4 @@
-name: Merge Main into PR
+name: Merge Main into dev
 
 on:
   pull_request:
