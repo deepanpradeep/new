@@ -1,31 +1,29 @@
-name: Merge Main into Dev and Update README
+name: Merge dev to main
 
 on:
   push:
-    branches: 
+    branches:
       - main
+      - dev
 
 jobs:
-  merge_main_dev:
+  merge_dev_to_main:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Merge main into dev
-        run: |
-          git config --global user.email "deepanpradeep406@gmail.com"
-          git config --global user.name "deepanpradeep"
-          git fetch origin dev:dev
-          git checkout dev
-          git merge main --no-edit
-          git push origin dev
+      - name: Merge dev into temp branch
+        run: git checkout -b temp && git merge dev
 
-      - name: Update README
+      - name: Run tests
         run: |
-          echo "### Merge Main into Dev" >> README.md
-          echo "This README file was automatically updated to reflect the merge of changes from the main branch into the dev branch." >> README.md
-          git add README.md
-          git commit -m "Update README after merging main into dev" || true
-          git push origin dev
+          # Run your tests here
+          # If tests fail, exit with a non-zero exit code to halt the workflow
+
+      - name: Merge temp branch into main
+        run: git checkout main && git merge temp
+
+      - name: Push changes to main
+        run: git push origin main
