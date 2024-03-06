@@ -1,0 +1,27 @@
+name: Merge dev into main
+
+on: 
+  push:
+    branches:  
+      - main 
+ 
+jobs: 
+  merge_dev_into_main:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+        with:
+          ref: main 
+
+      - name: Merge dev into main
+        run: git merge --no-ff origin/dev -m "Merge dev into main"
+        continue-on-error: true
+
+      - name: Push changes to main
+        run: |
+          
+          git push origin main
+
+          
