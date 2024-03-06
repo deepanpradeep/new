@@ -2,7 +2,7 @@ name: Merge dev into main
 
 on: 
   push:
-    branches:
+    branches: 
       - main 
 
 jobs: 
