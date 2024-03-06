@@ -3,7 +3,7 @@ name: Merge dev into main
 on: 
   push:
     branches:
-      - main
+      - main 
 
 jobs: 
   merge_dev_into_main:
