@@ -17,7 +17,7 @@ jobs:
 
       - name: Merge dev into main
         run: git merge --no-ff origin/dev -m "Merge dev into main"
-        continue-on-error: false
+        continue-on-error: true
 
       - name: Push changes to main
         run: |
