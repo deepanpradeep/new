@@ -1,40 +1,24 @@
-name: Merge Main into dev
+name: Merge Main into Dev
 
 on:
-  pull_request:
-    types: [labled]
-
-env:
-  DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+  push:
+    branches:
+      - main
 
 jobs:
-  main:
-    if: ${{ github.event.label.name == 'merge main' }}
-    name: Merge Main
+  merge_main_dev:
     runs-on: ubuntu-latest
+
     steps:
-      - name: git checkout
+      - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 0
 
-      - name: perform merge
+      - name: Merge main into dev
         run: |
-          git config --global user.email "deepanpradeep407@gmail.com"
-          git config --global user.name "deepanpradeep@users.noreply.github.com"
-          git status
-          git pull
-          git checkout "$dev_branch"
-          git status
-          git checkout "$main_branch"
-          git merge "$dev_branch" --no-edit
-          git push
-          git status
+          git config --global user.email "your_email@example.com"
+          git config --global user.name "Your Name"
+          git fetch origin dev:dev
+          git checkout dev
+          git merge main --no-edit
+          git push origin dev
 
-      - name: remove label
-        if: always()
-        uses: actions-ecosystem/action-remove-labels@v1
-        with:
-          labels: merge main
