@@ -21,4 +21,6 @@ jobs:
 
       - name: Push changes to main
         run: |
-          git push origin main
+          git push https://${{ secrets.GH_TOKEN }}@github.com/$GITHUB_REPOSITORY.git HEAD:main
+
+          
