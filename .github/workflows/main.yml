@@ -1,27 +1,24 @@
-name: Merge Dev README into Main
+name: Merge dev into main
 
 on:
   push:
-    branches: 
-      - dev
+    branches:
+      - main
 
 jobs:
-  merge_readme:
+  merge_dev_into_main:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-      
-    - name: Merge README
-      run: |
-        # Example script to merge README files
-        # Read contents of dev README
-        DEV_README=$(cat dev/README.md)
-        # Append dev README contents to main README
-        echo "$DEV_README" >> main/README.md
-        # Commit changes
-        git add main/README.md
-        git commit -m "Merge dev README into main"
-        # Push changes
-        git push origin main
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: Merge dev into main
+        run: git merge --no-ff origin/dev -m "Merge dev into main"
+        continue-on-error: true
+
+      - name: Push changes to main
+        run: |
+          git push origin main
