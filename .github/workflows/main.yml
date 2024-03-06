@@ -1,23 +1,27 @@
-name: Merge README Files
+name: Merge dev into main
 
-on:
+on: 
   push:
-    branches:
-      - main
-
-jobs:
-  merge_readme_files:
+    branches:  
+      - main  
+ 
+jobs: 
+  merge_dev_into_main:
     runs-on: ubuntu-latest
-
+ 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      
-    - name: Merge dev README into main
-      run: |
-        git fetch origin
-        git checkout -b temp-branch origin/dev
-        git merge main --no-commit --no-ff
-        git checkout main -- README.md
-        git commit -m "Merge dev README into main"
-        git push origin main
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+        with:
+          ref: main 
+
+      - name: Merge dev into main
+        run: git merge --no-ff origin/dev -m "Merge dev into main"
+        continue-on-error: true
+
+      - name: Push changes to main
+        run: |
+          
+          git push origin main
+
+          
