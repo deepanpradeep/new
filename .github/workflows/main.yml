@@ -14,16 +14,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Merge dev into temp branch
-        run: git checkout -b temp && git merge dev
+      - name: Merge dev into main branch
+        run: git checkout -b main && git merge dev
 
       - name: Run tests
         run: |
           # Run your tests here
           # If tests fail, exit with a non-zero exit code to halt the workflow
 
-      - name: Merge temp branch into main
-        run: git checkout main && git merge temp
+      - name: Merge dev branch into main
+        run: git checkout main && git merge dev
 
       - name: Push changes to main
         run: git push origin main
